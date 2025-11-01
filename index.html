@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campus Marketplace - Buy & Sell Used Products</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">
+            <div class="logo-icon">X</div>
+            <div class="logo-text"><span class="x">X</span> Hostel</div>
+        </div>
+        <nav class="nav-menu">
+            <a href="#home">Home</a>
+            <a href="#categories">Categories</a>
+            <a href="#featured">Browse</a>
+            <a href="#about">About</a>
+            <div class="auth-buttons">
+                <button class="btn-login" onclick="openLoginModal()">Login</button>
+                <button class="btn-signup" onclick="openSignupModal()">Sign Up</button>
+            </div>
+            <a href="#" class="btn-sell" onclick="checkAuth(event)">Sell Product</a>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <h1>Buy & Sell Used Products</h1>
+        <p>Seniors selling to juniors - Quality products at amazing prices</p>
+        <div class="search-bar">
+            <input type="text" placeholder="Search for books, electronics, furniture..." id="searchInput">
+            <button onclick="searchProducts()">Search</button>
+        </div>
+    </section>
+
+    <!-- Categories -->
+    <section class="categories" id="categories">
+        <h2 class="section-title">Popular Categories</h2>
+        <div class="category-grid">
+            <div class="category-card" onclick="filterCategory('books')">
+                <div class="category-icon">📚</div>
+                <div class="category-name">Books</div>
+            </div>
+            <div class="category-card" onclick="filterCategory('electronics')">
+                <div class="category-icon">💻</div>
+                <div class="category-name">Electronics</div>
+            </div>
+            <div class="category-card" onclick="filterCategory('furniture')">
+                <div class="category-icon">🪑</div>
+                <div class="category-name">Furniture</div>
+            </div>
+            <div class="category-card" onclick="filterCategory('sports')">
+                <div class="category-icon">⚽</div>
+                <div class="category-name">Sports</div>
+            </div>
+            <div class="category-card" onclick="filterCategory('clothing')">
+                <div class="category-icon">👕</div>
+                <div class="category-name">Clothing</div>
+            </div>
+            <div class="category-card" onclick="filterCategory('other')">
+                <div class="category-icon">📦</div>
+                <div class="category-name">Other</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section class="featured" id="featured">
+        <h2 class="section-title">Featured Products</h2>
+        <div class="products-grid" id="productsGrid"></div>
+    </section>
+
+    <!-- Stats -->
+    <section class="stats">
+        <h2 class="section-title">Why Choose CampusMarket?</h2>
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-number">500+</div>
+                <div class="stat-label">Active Listings</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">1000+</div>
+                <div class="stat-label">Happy Students</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">50+</div>
+                <div class="stat-label">Daily Transactions</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="#">Terms of Service</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Contact Us</a>
+            <a href="#">FAQ</a>
+        </div>
+        <p style="color: #666;">© 2024 X Hostel. All rights reserved.</p>
+    </footer>
+
+    <!-- Login Modal -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('loginModal')">&times;</span>
+            <h2>Login</h2>
+            <form onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label for="loginEmail">Email</label>
+                    <input type="email" id="loginEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" required>
+                </div>
+                <button type="submit" class="form-submit">Login</button>
+                <div class="form-footer">
+                    Don't have an account? <a onclick="switchToSignup()">Sign Up</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div class="modal" id="signupModal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('signupModal')">&times;</span>
+            <h2>Sign Up</h2>
+            <form onsubmit="handleSignup(event)">
+                <div class="form-group">
+                    <label for="signupName">Full Name</label>
+                    <input type="text" id="signupName" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupEmail">Email</label>
+                    <input type="email" id="signupEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupBatch">Batch Year</label>
+                    <input type="text" id="signupBatch" placeholder="e.g., 2024" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupPassword">Password</label>
+                    <input type="password" id="signupPassword" required>
+                </div>
+                <button type="submit" class="form-submit">Sign Up</button>
+                <div class="form-footer">
+                    Already have an account? <a onclick="switchToLogin()">Login</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Sample product data
+        const products = [
+            { id: 1, title: "Engineering Textbooks Bundle", price: 1200, seller: "Rahul (2024 Batch)", condition: "Good", icon: "📚", category: "books" },
+            { id: 2, title: "Laptop - Dell Inspiron", price: 25000, seller: "Priya (2024 Batch)", condition: "Excellent", icon: "💻", category: "electronics" },
+            { id: 3, title: "Study Table with Chair", price: 2500, seller: "Amit (2024 Batch)", condition: "Good", icon: "🪑", category: "furniture" },
+            { id: 4, title: "Scientific Calculator", price: 800, seller: "Sneha (2024 Batch)", condition: "Like New", icon: "🔢", category: "electronics" },
+            { id: 5, title: "Cricket Bat & Ball Set", price: 1500, seller: "Vikram (2024 Batch)", condition: "Good", icon: "🏏", category: "sports" },
+            { id: 6, title: "Programming Books Set", price: 1800, seller: "Anjali (2024 Batch)", condition: "Excellent", icon: "📖", category: "books" },
+            { id: 7, title: "Bluetooth Headphones", price: 2000, seller: "Karan (2024 Batch)", condition: "Good", icon: "🎧", category: "electronics" },
+            { id: 8, title: "Wardrobe (Large)", price: 4000, seller: "Meera (2024 Batch)", condition: "Good", icon: "👗", category: "furniture" },
+        ];
+
+        // Display products
+        function displayProducts(productsToShow) {
+            const grid = document.getElementById('productsGrid');
+            grid.innerHTML = '';
+            
+            productsToShow.forEach(product => {
+                const card = document.createElement('div');
+                card.className = 'product-card';
+                card.innerHTML = `
+                    <div class="product-image">${product.icon}</div>
+                    <div class="product-info">
+                        <div class="product-title">${product.title}</div>
+                        <div class="product-price">₹${product.price}</div>
+                        <div class="product-seller">Seller: ${product.seller}</div>
+                        <span class="product-condition">${product.condition}</span>
+                    </div>
+                `;
+                card.onclick = () => alert(`Viewing: ${product.title}\nPrice: ₹${product.price}\nContact seller for details!`);
+                grid.appendChild(card);
+            });
+        }
+
+        // Search functionality
+        function searchProducts() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const filtered = products.filter(p => 
+                p.title.toLowerCase().includes(query) || 
+                p.category.toLowerCase().includes(query)
+            );
+            displayProducts(filtered);
+            document.getElementById('featured').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Category filter
+        function filterCategory(category) {
+            const filtered = products.filter(p => p.category === category);
+            displayProducts(filtered);
+            document.getElementById('featured').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Enter key for search
+        document.getElementById('searchInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                searchProducts();
+            }
+        });
+
+        // Initial display
+        displayProducts(products);
+
+        // Smooth scroll for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                if (this.getAttribute('href') !== '#') {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Modal functions
+        function openLoginModal() {
+            document.getElementById('loginModal').classList.add('active');
+        }
+
+        function openSignupModal() {
+            document.getElementById('signupModal').classList.add('active');
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+        }
+
+        function switchToSignup() {
+            closeModal('loginModal');
+            openSignupModal();
+        }
+
+        function switchToLogin() {
+            closeModal('signupModal');
+            openLoginModal();
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.classList.remove('active');
+            }
+        }
+
+        // Handle login
+        function handleLogin(event) {
+            event.preventDefault();
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            
+            // Store user session (simple implementation)
+            sessionStorage.setItem('isLoggedIn', 'true');
+            sessionStorage.setItem('userEmail', email);
+            
+            alert('Login successful! Welcome back.');
+            closeModal('loginModal');
+            updateAuthUI();
+        }
+
+        // Handle signup
+        function handleSignup(event) {
+            event.preventDefault();
+            const name = document.getElementById('signupName').value;
+            const email = document.getElementById('signupEmail').value;
+            const batch = document.getElementById('signupBatch').value;
+            const password = document.getElementById('signupPassword').value;
+            
+            // Store user session
+            sessionStorage.setItem('isLoggedIn', 'true');
+            sessionStorage.setItem('userName', name);
+            sessionStorage.setItem('userEmail', email);
+            sessionStorage.setItem('userBatch', batch);
+            
+            alert('Account created successfully! Welcome to X Hostel.');
+            closeModal('signupModal');
+            updateAuthUI();
+        }
+
+        // Check if user is logged in before selling
+        function checkAuth(event) {
+            event.preventDefault();
+            if (sessionStorage.getItem('isLoggedIn') === 'true') {
+                alert('Opening sell product page...');
+            } else {
+                alert('Please login to sell products.');
+                openLoginModal();
+            }
+        }
+
+        // Update UI based on auth state
+        function updateAuthUI() {
+            const isLoggedIn = sessionStorage.getItem('isLoggedIn') === 'true';
+            if (isLoggedIn) {
+                const userName = sessionStorage.getItem('userName') || 'User';
+                // Could update header to show user name and logout button
+            }
+        }
+
+        // Check auth state on load
+        updateAuthUI();
+    </script>
+</body>
+</html>
