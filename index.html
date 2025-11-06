@@ -23,6 +23,7 @@
                 <button class="btn-signup" onclick="openSignupModal()">Sign Up</button>
             </div>
             <a href="#" class="btn-sell" onclick="checkAuth(event)">Sell Product</a>
+            <button id="theme-toggle">☀️</button>
         </nav>
     </header>
 
@@ -316,6 +317,35 @@
 
         // Check auth state on load
         updateAuthUI();
+
+        // Theme toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        const body = document.body;
+
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('light-mode');
+            if (body.classList.contains('light-mode')) {
+                localStorage.setItem('theme', 'light');
+                themeToggle.textContent = '🌙';
+            } else {
+                localStorage.setItem('theme', 'dark');
+                themeToggle.textContent = '☀️';
+            }
+        });
+
+        // Apply theme on load
+        function applyTheme() {
+            const theme = localStorage.getItem('theme');
+            if (theme === 'light') {
+                body.classList.add('light-mode');
+                themeToggle.textContent = '🌙';
+            } else {
+                body.classList.remove('light-mode');
+                themeToggle.textContent = '☀️';
+            }
+        }
+
+        applyTheme();
     </script>
 </body>
 </html>

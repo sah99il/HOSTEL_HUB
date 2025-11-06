@@ -17,7 +17,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 3px solid #ff6b00;
+    border-bottom: 3px solid #FFD700;
     position: sticky;
     top: 0;
     z-index: 100;
@@ -33,7 +33,7 @@ body {
 }
 
 .logo-icon {
-    background: #ff6b00;
+    background: #FFD700;
     color: #000;
     width: 40px;
     height: 40px;
@@ -50,7 +50,7 @@ body {
 }
 
 .logo-text .x {
-    color: #ff6b00;
+    color: #FFD700;
     font-size: 32px;
 }
 
@@ -67,8 +67,7 @@ body {
     transition: color 0.3s;
 }
 
-.nav-menu a:hover {
-    color: #ff6b00;
+    color: #FFD700;
 }
 
 .auth-buttons {
@@ -110,7 +109,7 @@ body {
 }
 
 .btn-sell {
-    background: #ff6b00;
+    background: #FFD700;
     padding: 10px 25px;
     border-radius: 5px;
     font-weight: bold;
@@ -118,7 +117,7 @@ body {
 }
 
 .btn-sell:hover {
-    background: #ff8534;
+    background: #E6C200;
     transform: translateY(-2px);
 }
 
@@ -132,7 +131,7 @@ body {
 .hero h1 {
     font-size: 48px;
     margin-bottom: 20px;
-    color: #ff6b00;
+    color: #FFD700;
 }
 
 .hero p {
@@ -160,12 +159,12 @@ body {
 
 .search-bar input:focus {
     outline: none;
-    border-color: #ff6b00;
+    border-color: #FFD700;
 }
 
 .search-bar button {
     padding: 15px 40px;
-    background: #ff6b00;
+    background: #FFD700;
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -176,7 +175,7 @@ body {
 }
 
 .search-bar button:hover {
-    background: #ff8534;
+    background: #E6C200;
 }
 
 /* Categories */
@@ -487,5 +486,226 @@ body {
     .stats {
         padding: 40px 20px;
     }
+}
+
+#theme-toggle {
+    background: transparent;
+    border: 2px solid #666;
+    color: #fff;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+body.light-mode {
+    background: #f0f0f0;
+    color: #333;
+}
+
+.light-mode .header {
+    background: #fff;
+    border-bottom: 3px solid #007bff;
+}
+
+.light-mode .logo-text {
+    color: #333;
+}
+
+.light-mode .logo-text .x {
+    color: #007bff;
+}
+
+.light-mode .nav-menu a {
+    color: #333;
+}
+
+.light-mode .nav-menu a:hover {
+    color: #007bff;
+}
+
+.light-mode .btn-login {
+    color: #333;
+    border-color: #ccc;
+}
+
+.light-mode .btn-login:hover {
+    background: #eee;
+}
+
+.light-mode .btn-signup {
+    background: #ccc;
+    color: #333;
+    border-color: #ccc;
+}
+
+.light-mode .btn-signup:hover {
+    background: #ddd;
+}
+
+.light-mode .btn-sell {
+    background: #007bff;
+    color: #fff;
+}
+
+.light-mode .btn-sell:hover {
+    background: #0056b3;
+}
+
+.light-mode .hero {
+    background: linear-gradient(135deg, #f0f0f0 0%, #e9e9e9 100%);
+}
+
+.light-mode .hero h1 {
+    color: #007bff;
+}
+
+.light-mode .hero p {
+    color: #666;
+}
+
+.light-mode .search-bar input {
+    background: #fff;
+    border-color: #ccc;
+    color: #333;
+}
+
+.light-mode .search-bar input:focus {
+    border-color: #007bff;
+}
+
+.light-mode .search-bar button {
+    background: #007bff;
+}
+
+.light-mode .search-bar button:hover {
+    background: #0056b3;
+}
+
+.light-mode .categories {
+    background: #f0f0f0;
+}
+
+.light-mode .section-title {
+    color: #007bff;
+}
+
+.light-mode .category-card {
+    background: #fff;
+    border-color: transparent;
+}
+
+.light-mode .category-card:hover {
+    background: #f9f9f9;
+    border-color: #007bff;
+}
+
+.light-mode .featured {
+    background: #f9f9f9;
+}
+
+.light-mode .product-card {
+    background: #fff;
+    border-color: transparent;
+}
+
+.light-mode .product-card:hover {
+    border-color: #007bff;
+    box-shadow: 0 10px 30px rgba(0, 123, 255, 0.1);
+}
+
+.light-mode .product-title {
+    color: #333;
+}
+
+.light-mode .product-price {
+    color: #007bff;
+}
+
+.light-mode .product-seller {
+    color: #777;
+}
+
+.light-mode .product-condition {
+    background: #eee;
+    color: #555;
+}
+
+.light-mode .stats {
+    background: #f0f0f0;
+}
+
+.light-mode .stat-number {
+    color: #007bff;
+}
+
+.light-mode .stat-label {
+    color: #666;
+}
+
+.light-mode .footer {
+    background: #fff;
+    border-top: 3px solid #007bff;
+}
+
+.light-mode .footer-links a {
+    color: #777;
+}
+
+.light-mode .footer-links a:hover {
+    color: #007bff;
+}
+
+.light-mode .modal-content {
+    background: #fff;
+    border-color: #ccc;
+}
+
+.light-mode .close-modal {
+    color: #aaa;
+}
+
+.light-mode .close-modal:hover {
+    color: #333;
+}
+
+.light-mode .modal-content h2 {
+    color: #333;
+}
+
+.light-mode .form-group label {
+    color: #666;
+}
+
+.light-mode .form-group input {
+    background: #f0f0f0;
+    border-color: #ccc;
+    color: #333;
+}
+
+.light-mode .form-group input:focus {
+    border-color: #007bff;
+}
+
+.light-mode .form-submit {
+    background: #ccc;
+    color: #333;
+}
+
+.light-mode .form-submit:hover {
+    background: #ddd;
+}
+
+.light-mode .form-footer {
+    color: #777;
+}
+
+.light-mode .form-footer a {
+    color: #007bff;
+}
+
+.light-mode #theme-toggle {
+    border-color: #ccc;
+    color: #333;
 }
 
